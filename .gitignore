@@ -367,6 +367,7 @@ FodyWeavers.xsd
 # Ignore Docker volumes and logs
 postgres_data/
 .containers/
+.contaienrs/
 *.log
 
 # Ignore .NET build outputs
