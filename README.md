@@ -1,26 +1,38 @@
 # 🧩 MicroservicesDemo
 
-A complete microservices-based system built using **.NET**, **RabbitMQ**, **Redis**, **Docker**, **MongoDB**, and **PostgreSQL**, demonstrating Clean Architecture, CQRS, MediatR, and Event-Driven communication. This project is ideal for learning microservices architecture in a practical and scalable manner.
+A comprehensive microservices-based system built with **.NET**, **RabbitMQ**, **Redis**, **Docker**, **MongoDB**, and **PostgreSQL**, showcasing **Clean Architecture**, **CQRS**, **MediatR**, **Event Sourcing**, **Vertical Slice Architecture (VSA)**, and robust **event-driven communication**.
+
+This project serves as a practical and scalable example for learning and applying microservices architecture in the real world.
 
 ---
 
 ## 🏗️ Architecture Overview
 
-This project implements a **microservice architecture** with **event-driven communication** using RabbitMQ. Each service is independently deployable, containerized with Docker, and communicates through asynchronous messages. Redis is integrated for caching and message queuing where applicable.
+This solution implements a **modular microservices architecture** using **RabbitMQ** for asynchronous communication between services. Each service is:
 
-### ✅ Key Features
+- **Independently deployable**
+- **Containerized with Docker**
+- **Communicates via events/messages**
 
-- **.NET 9** with **Clean Architecture**
-- **CQRS + MediatR** for separation of concerns
-- **Unit of Work** and **Repository Pattern** for transactional data access and abstraction
-- **FluentValidation** for robust and reusable validation logic
-- **Minimal APIs** used for lightweight and expressive HTTP endpoints
-- **RabbitMQ** for event-driven messaging
-- **Redis** for caching and fast data access
-- **MongoDB** and **PostgreSQL** for data persistence
-- **Docker Compose** for orchestration
-- **Serilog** for structured logging
-- **Exception handling** with middleware
+Redis is used for **caching** and enhancing performance. The architecture follows the **Vertical Slice Architecture (VSA)** pattern for modular feature organization, and **Event Sourcing** is adopted for full traceability and auditability of key domain actions.
+
+---
+
+## ✅ Key Features
+
+- ✅ Built with **.NET 9** and **Clean Architecture**
+- ✅ Implements **CQRS** with **MediatR**
+- ✅ Uses **Vertical Slice Architecture (VSA)** for modular design
+- ✅ Supports **Event Sourcing** for traceable and replayable state
+- ✅ Implements **Unit of Work** and **Repository Pattern**
+- ✅ Uses **FluentValidation** for input validation
+- ✅ Leverages **Minimal APIs** for lightweight endpoints
+- ✅ Uses **RabbitMQ** for event-driven messaging
+- ✅ Integrates **Redis** for caching
+- ✅ Supports **MongoDB** and **PostgreSQL** for persistence
+- ✅ Orchestrated with **Docker Compose**
+- ✅ Logs structured data using **Serilog**
+- ✅ Centralized **exception handling** via middleware
 
 ---
 
@@ -28,38 +40,21 @@ This project implements a **microservice architecture** with **event-driven comm
 
 | Service              | Tech Stack               | Database     | Description                                  |
 |----------------------|--------------------------|--------------|----------------------------------------------|
-| **ProductService**   | ASP.NET Core Minimal API | PostgreSQL   | Manages product-related operations           |
-| **InventoryService** | ASP.NET Core Minimal API | MongoDB      | Manages inventory stock levels               |
+| **ProductService**   | ASP.NET Core Minimal API | PostgreSQL   | Handles product catalog and operations       |
+| **InventoryService** | ASP.NET Core Minimal API | MongoDB      | Manages stock levels and inventory tracking  |
 
-Each service is isolated and follows the **Single Responsibility Principle**. Business logic is encapsulated inside the Application Layer using **Clean Architecture**.
-
----
-
-## ✅ Validation
-
-All input models are validated using **FluentValidation**, ensuring that only valid data proceeds to the business logic layer. Validators are registered automatically and integrated into the request pipeline.
-
----
-
-## 🔄 Communication
-
-The services communicate via **RabbitMQ** using **publish/subscribe** patterns:
-
-- `Events` is published by **ProductService**
-- **InventoryService** listens and updates inventory accordingly
-
-**Redis** is used for caching frequently accessed data to improve performance and scalability.
+Each service follows the **Single Responsibility Principle**, and business logic is encapsulated in the **Application Layer** using **Vertical Slice Architecture** and **Clean Architecture** principles.
 
 ---
 
 ## 🐳 Docker Setup
 
-### Prerequisites
+### 📦 Prerequisites
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-### Run the whole system
+### ▶️ Running the System
 
 ```bash
 docker-compose up --build
