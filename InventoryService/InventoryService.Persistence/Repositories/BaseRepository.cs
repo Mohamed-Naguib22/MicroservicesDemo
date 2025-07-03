@@ -1,5 +1,7 @@
 ﻿using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
+using InventoryService.Application.Contract.ISpecifications;
 using InventoryService.Domain.Entities.Common;
+using InventoryService.Persistence.Specifications;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -41,45 +43,6 @@ namespace InventoryService.Persistence.Repositories
             await _collection.ReplaceOneAsync(filter, entity);
         }
 
-        public async Task DeleteAsync(T entity)
-        {
-            var filter = Builders<T>.Filter.Eq(e => e.Id, entity.Id);
-
-            await _collection.DeleteOneAsync(filter);
-        }
-
-        public async Task<IReadOnlyList<T>> FindAsync(
-            Expression<Func<T, bool>> predicate,
-            Expression<Func<T, object>>? orderBy = null,
-            bool ascending = true,
-            int? limit = null)
-        {
-            var query = _collection.Find(predicate);
-
-            if (orderBy != null)
-            {
-                query = ascending
-                    ? query.SortBy(orderBy)
-                    : query.SortByDescending(orderBy);
-            }
-
-            if (limit.HasValue)
-            {
-                query = query.Limit(limit.Value);
-            }
-
-            var result = await query.ToListAsync();
-
-            return result.AsReadOnly();
-        }
-
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
-        {
-            var entity = await _collection.Find(predicate).FirstOrDefaultAsync();
-
-            return entity;
-        }
-
         public async Task UpdateManyAsync(List<T> entities)
         {
             var bulkOperations = entities.Select(entity =>
@@ -94,16 +57,19 @@ namespace InventoryService.Persistence.Repositories
             }
         }
 
-        public async Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate)
+        public async Task DeleteAsync(T entity)
         {
-            var entity = await _collection.Find(predicate).FirstOrDefaultAsync();
+            var filter = Builders<T>.Filter.Eq(e => e.Id, entity.Id);
 
-            return entity != null;
+            await _collection.DeleteOneAsync(filter);
         }
 
-        public async Task<int> CountAsync(Expression<Func<T, bool>> predicate)
-        {
-            return (int)await _collection.CountDocumentsAsync(predicate);
-        }
+        public async Task<IReadOnlyList<T>> FindAsync(ISpecification<T> spec) => (await SpecificationEvaluator<T>.GetQuery(_collection, spec).ToListAsync()).AsReadOnly();
+
+        public async Task<T> FirstOrDefaultAsync(ISpecification<T> spec) => await SpecificationEvaluator<T>.GetQuery(_collection, spec).FirstOrDefaultAsync();
+
+        public async Task<bool> ExistsAsync(ISpecification<T> spec) => await SpecificationEvaluator<T>.GetQuery(_collection, spec).AnyAsync();
+
+        public async Task<int> CountAsync(ISpecification<T> spec) => (int)await _collection.CountDocumentsAsync(spec.Criteria);
     }
 }

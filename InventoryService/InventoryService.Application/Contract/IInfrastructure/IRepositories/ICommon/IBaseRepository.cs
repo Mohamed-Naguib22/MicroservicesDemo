@@ -1,4 +1,5 @@
-﻿using InventoryService.Domain.Entities.Common;
+﻿using InventoryService.Application.Contract.ISpecifications;
+using InventoryService.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,10 @@ namespace InventoryService.Application.Contract.IInfrastructure.IRepositories.IC
         Task AddRangeAsync(List<T> entities);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
-        Task<IReadOnlyList<T>> FindAsync(
-            Expression<Func<T, bool>> predicate,
-            Expression<Func<T, object>>? orderBy = null,
-            bool ascending = true,
-            int? limit = null
-        );
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+        Task<IReadOnlyList<T>> FindAsync(ISpecification<T> spec);
+        Task<T> FirstOrDefaultAsync(ISpecification<T> spec);
         Task UpdateManyAsync(List<T> entities);
-        Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate);
-        Task<int> CountAsync(Expression<Func<T, bool>> predicate);
+        Task<bool> ExistsAsync(ISpecification<T> spec);
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }

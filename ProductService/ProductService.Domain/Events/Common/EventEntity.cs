@@ -11,6 +11,6 @@ namespace ProductService.Domain.Events.Common
         public Guid Id { get; set; }
         public string EventType { get; set; }
         public string Data { get; set; }
-        public DateTimeOffset OccurredOn { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset OccurredOn { get; set; }
     }
 }

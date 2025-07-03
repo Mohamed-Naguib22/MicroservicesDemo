@@ -56,5 +56,21 @@ namespace InventoryService.Persistence.Caching
                 throw new InvalidOperationException("Failed to serialize and cache data.", ex);
             }
         }
+
+        public async Task RemoveDataAsync(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Cache key cannot be null or empty.", nameof(key));
+
+            try
+            {
+                await _cache.RemoveAsync(key);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Failed to remove data from cache.", ex);
+            }
+        }
+
     }
 }

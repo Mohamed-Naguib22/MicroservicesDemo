@@ -25,7 +25,8 @@ namespace ProductService.Infrastructure.Services.EventDispatcher
             {
                 Id = Guid.NewGuid(),
                 EventType = eventType,
-                Data = jsonData
+                Data = jsonData,
+                OccurredOn = DateTimeOffset.Now,
             };
 
             await _unitOfWork.EventStoreRepository.StoreEventAsync(eventEntity);

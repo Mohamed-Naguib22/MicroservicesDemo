@@ -10,5 +10,6 @@ namespace InventoryService.Application.Contract.IInfrastructure.ICaching
     {
         Task<T> GetDataAsync<T>(string key);
         Task SetDataAsync<T>(string key, T data);
+        Task RemoveDataAsync(string key);
     }
 }

@@ -19,7 +19,8 @@ namespace InventoryService.Application.Features.ProductFeatures.Queries.GetAllPr
         private readonly ICachingService _cachingService = cachingService;
         public override async Task<IEnumerable<GetAllProductsResponse>> Handle(GetAllProductsRequest request, CancellationToken cancellationToken)
         {
-            var products = Enumerable.Empty<Product>();
+            IEnumerable<Product> products;
+
             var cahcedProducts = await _cachingService.GetDataAsync<IEnumerable<Product>>(RedisKeys.PRODUCTS_KEY);
 
             if (cahcedProducts is not null)
