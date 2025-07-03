@@ -12,7 +12,7 @@ namespace ProductService.Application.Features.ProductFeatures.Commands.CreatePro
     {
         public CreateProductMapper()
         {
-            CreateMap<CreateProductRequest, ProductCreated>();
+            CreateMap<CreateProductRequest, ProductCreatedEvent>();
         }
     }
 }

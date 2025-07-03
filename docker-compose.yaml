@@ -26,9 +26,9 @@ services:
     container_name: inventory-service
     ports:
       - "5100:5100"
-      - "5101:5101"
     depends_on:
       - rabbitmq
+      - mongo
     networks:
       - microservices-network
 
@@ -44,6 +44,16 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
     networks:
       - microservices-network
 
@@ -64,3 +74,4 @@ networks:
 
 volumes:
   postgres_data:
+  mongo_data:

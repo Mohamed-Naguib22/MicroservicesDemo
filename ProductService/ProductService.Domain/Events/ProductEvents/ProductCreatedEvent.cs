@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductService.Domain.Events.ProductEvents
 {
-    public sealed record ProductCreated
+    public sealed record ProductCreatedEvent
     {
         public string Name { get; set; }
         public int Quantity { get; set; }

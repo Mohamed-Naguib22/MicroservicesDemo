@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 
 namespace ProductService.Application.Features.ProductFeatures.Commands.CreateProduct
 {
-    public sealed class CreateProductHandler(IEventDispatcher eventDispatcher, IMapper mapper) : BaseEventHandler<ProductCreated, CreateProductRequest>(eventDispatcher, mapper);
+    public sealed class CreateProductHandler(IEventDispatcher eventDispatcher, IMapper mapper) : BaseEventHandler<ProductCreatedEvent, CreateProductRequest>(eventDispatcher, mapper);
 }
