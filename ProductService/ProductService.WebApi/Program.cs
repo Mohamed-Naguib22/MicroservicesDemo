@@ -38,6 +38,7 @@ app.UseRouting();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapEventsEndpoints();
 app.MapProductEndpoints();
 app.MapControllers();
 app.Run();

@@ -1,7 +1,7 @@
 ﻿using ProductService.Application.Contract.IInfrastructure.IEventDispatcher;
 using ProductService.Application.Contract.IInfrastructure.IMessagePublisher;
 using ProductService.Application.Contract.IInfrastructure.IRepositories.ICommon;
-using ProductService.Domain.Events.Common;
+using ProductService.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

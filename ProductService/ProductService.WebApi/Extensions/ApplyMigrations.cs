@@ -9,7 +9,7 @@ namespace ProductService.WebApi.Extensions
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                var context = scope.ServiceProvider.GetRequiredService<EventStoreDbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<EventStoreDbContext>();
                 context.Database.Migrate();
             }
         }

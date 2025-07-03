@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Domain.Events.Common
+namespace ProductService.Domain.Entities.Common
 {
     public class EventEntity
     {

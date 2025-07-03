@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProductService.Persistence.Context;
@@ -11,9 +12,11 @@ using ProductService.Persistence.Context;
 namespace ProductService.Persistence.Migrations
 {
     [DbContext(typeof(EventStoreDbContext))]
-    partial class EventStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250703190546_AddEventConstraints")]
+    partial class AddEventConstraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

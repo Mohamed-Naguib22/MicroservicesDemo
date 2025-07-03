@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ProductService.Application.Features.ProductFeatures.Commands.CreateProduct;
 using ProductService.Application.Features.ProductFeatures.Commands.DeleteProduct;
+using ProductService.Application.Features.ProductFeatures.Commands.UpdateProduct;
 
 namespace ProductService.WebApi.Endpoints
 {
@@ -13,6 +14,13 @@ namespace ProductService.WebApi.Endpoints
             producttGroup.MapPost($"Create", async (IMediator mediator, CreateProductRequest request) =>
             {
                 var response = await mediator.Send(request);
+
+                return Results.Ok();
+            });
+
+            producttGroup.MapPut($"Update/{{productId}}", async (IMediator mediator, string productId, UpdateProductDto updateProductDto) =>
+            {
+                var response = await mediator.Send(new UpdateProductRequest(productId, updateProductDto));
 
                 return Results.Ok();
             });

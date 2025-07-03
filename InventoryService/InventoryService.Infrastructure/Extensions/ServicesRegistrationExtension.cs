@@ -19,10 +19,11 @@ namespace InventoryService.Infrastructure.Extensions
         {
             services.AddHostedService<ProductDeletedConsumer>();
             services.AddHostedService<ProductCreatedConsumer>();
+            services.AddHostedService<ProductUpdatedConsumer>();
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.File(@"D:\Logs\MicroservicesDemo\InventoryService\log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             host.UseSerilog();

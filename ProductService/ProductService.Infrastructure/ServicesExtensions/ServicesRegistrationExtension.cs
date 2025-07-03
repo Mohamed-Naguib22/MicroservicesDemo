@@ -29,7 +29,7 @@ namespace ProductService.Infrastructure.ServicesExtensions
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.File(@"D:\Logs\MicroservicesDemo\InventoryService\log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             host.UseSerilog();

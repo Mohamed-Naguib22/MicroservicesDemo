@@ -20,7 +20,14 @@ namespace ProductService.Persistence.Repositories.Common
             _context = context;
             Entities = _context.Set<T>();
         }
- 
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            var query = Entities.AsQueryable();
+
+            return await query.ToListAsync();
+        }
+
         public async Task AddAsync(T entity)
         {
             await Entities.AddAsync(entity);

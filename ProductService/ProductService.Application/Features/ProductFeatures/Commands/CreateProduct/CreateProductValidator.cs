@@ -12,7 +12,7 @@ namespace ProductService.Application.Features.ProductFeatures.Commands.CreatePro
         public CreateProductValidator()
         {
             RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.Quantity).NotEmpty();
+            RuleFor(x => x.Quantity).NotEmpty().GreaterThan(0);
         }
     }
 }
