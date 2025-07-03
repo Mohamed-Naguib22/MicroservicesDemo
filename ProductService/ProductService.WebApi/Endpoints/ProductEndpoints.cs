@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using ProductService.Application.Features.ProductFeatures.Commands.CreateProduct;
+using ProductService.Application.Features.ProductFeatures.Commands.DeleteProduct;
 
 namespace ProductService.WebApi.Endpoints
 {
@@ -16,6 +17,12 @@ namespace ProductService.WebApi.Endpoints
                 return Results.Ok();
             });
 
+            producttGroup.MapDelete($"Delete/{{productId}}", async (IMediator mediator, string productId) =>
+            {
+                var response = await mediator.Send(new DeleteProductRequest(productId));
+
+                return Results.Ok();
+            });
         }
     }
 }

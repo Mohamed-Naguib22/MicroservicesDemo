@@ -3,13 +3,14 @@ using InventoryService.Infrastructure.Extensions;
 using InventoryService.Application.Extensions;
 using InventoryService.WebApi.Extensions;
 using InventoryService.WebApi.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("http://*:5100");
 
 builder.Services.ConfigureApplication();
-builder.Services.ConfigureInfrastructure(builder.Configuration);
+builder.Services.ConfigureInfrastructure(builder.Configuration, builder.Host);
 builder.Services.ConfigurePersistence(builder.Configuration);
 
 builder.Services.ConfigureSwagger(builder.Configuration);
@@ -30,10 +31,11 @@ else if (app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
-app.UseCors();
 app.UseErrorHandler();
+app.UseSerilogRequestLogging();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

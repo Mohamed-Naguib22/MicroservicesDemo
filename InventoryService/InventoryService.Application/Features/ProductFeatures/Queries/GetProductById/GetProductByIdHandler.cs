@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
+using InventoryService.Application.Exceptions;
 using InventoryService.Application.Mediator.Common;
 using InventoryService.Domain.Constants;
 using InventoryService.Domain.Entities.ProductEntities;
@@ -15,7 +16,9 @@ namespace InventoryService.Application.Features.ProductFeatures.Queries.GetProdu
     {
         public override async Task<GetProductByIdResponse> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)
         {
-            var products = await _unitOfWork.GetRepository<Product>().FirstOrDefaultAsync(new GetProductByIdSpecification(request.Id));
+            var products = await _unitOfWork.GetRepository<Product>().FirstOrDefaultAsync(
+                new GetProductByIdSpecification(request.Id)
+            ) ?? throw new EntityNotFoundException();
 
             return _mapper.Map<GetProductByIdResponse>(products);
         }

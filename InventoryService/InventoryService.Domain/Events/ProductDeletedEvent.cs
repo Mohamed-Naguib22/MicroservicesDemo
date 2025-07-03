@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace InventoryService.Domain.Events
 {
-    public sealed record ProductCreatedEvent(string Name, int Quantity);
+    public sealed record ProductDeletedEvent(string ProductId);
 }

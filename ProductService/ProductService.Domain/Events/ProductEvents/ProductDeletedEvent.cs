@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace ProductService.Domain.Events.ProductEvents
 {
-    public sealed record ProductCreatedEvent(string Name, int Quantity);
+    public sealed record ProductDeletedEvent(string ProductId);
 }

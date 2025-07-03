@@ -3,6 +3,8 @@ using InventoryService.Infrastructure.Services.MessageConsumer.ProductConsumers;
 using InventoryService.Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,17 @@ namespace InventoryService.Infrastructure.Extensions
 {
     public static class ServicesRegistrationExtension
     {
-        public static void ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostBuilder host)
         {
+            services.AddHostedService<ProductDeletedConsumer>();
             services.AddHostedService<ProductCreatedConsumer>();
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.File(@"D:\Logs\MicroservicesDemo\InventoryService\log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            host.UseSerilog();
 
             services.Configure<RabbitMQSettings>(options =>
             {

@@ -23,6 +23,7 @@ namespace InventoryService.WebApi.Middleware
                     {
                         BadRequestException => (int)HttpStatusCode.BadRequest,
                         OperationCanceledException => (int)HttpStatusCode.ServiceUnavailable,
+                        EntityNotFoundException => (int)HttpStatusCode.NotFound,
                         HttpRequestException => (int)HttpStatusCode.BadGateway,
                         _ => (int)HttpStatusCode.InternalServerError
                     };
