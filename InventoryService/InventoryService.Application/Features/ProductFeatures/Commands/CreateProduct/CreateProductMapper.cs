@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
-using ProductService.Domain.Events.ProductEvents;
+using InventoryService.Domain.Entities.ProductEntities;
+using InventoryService.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Application.Features.ProductFeatures.Commands.CreateProduct
+namespace InventoryService.Application.Features.ProductFeatures.Commands.CreateProduct
 {
     public sealed class CreateProductMapper : Profile
     {
         public CreateProductMapper()
         {
-            CreateMap<CreateProductRequest, ProductCreated>();
+            CreateMap<ProductCreatedEvent, Product>();
         }
     }
 }

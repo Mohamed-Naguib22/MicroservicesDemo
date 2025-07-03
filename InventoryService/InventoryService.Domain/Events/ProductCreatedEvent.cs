@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Domain.Events.ProductEvents
+namespace InventoryService.Domain.Events
 {
-    public sealed record ProductCreated
+    public sealed record ProductCreatedEvent
     {
         public string Name { get; set; }
         public int Quantity { get; set; }

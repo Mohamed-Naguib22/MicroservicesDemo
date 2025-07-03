@@ -1,22 +1,22 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using InventoryService.Application.Behaviors;
+using InventoryService.Infrastructure.Services.MessageConsumer.ProductConsumers;
+using InventoryService.Infrastructure.Settings;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProductService.Application.Contract.IInfrastructure.IEventDispatcher;
-using ProductService.Application.Contract.IInfrastructure.IMessagePublisher;
-using ProductService.Infrastructure.Services.EventDispatcher;
-using ProductService.Infrastructure.Services.MessagePublisher;
-using ProductService.Infrastructure.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Infrastructure.ServicesExtensions
+namespace InventoryService.Infrastructure.Extensions
 {
     public static class ServicesRegistrationExtension
     {
         public static void ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHostedService<ProductCreatedConsumer>();
+
             services.Configure<RabbitMQSettings>(options =>
             {
                 options.UserName = configuration["RabbitMQSettings:UserName"];
@@ -24,10 +24,6 @@ namespace ProductService.Infrastructure.ServicesExtensions
                 options.HostName = configuration["RabbitMQSettings:HostName"];
                 options.VirtualHost = configuration["RabbitMQSettings:VirtualHost"];
             });
-
-            services.AddScoped<IEventDispatcher, EventDispatcher>();
-
-            services.AddTransient<IMessagePublisher, RabbitMQPublisher>();
         }
     }
 }

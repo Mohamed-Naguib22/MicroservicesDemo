@@ -1,15 +1,14 @@
-using ProductService.Application.Extensions;
-using ProductService.Infrastructure.ServicesExtensions;
-using ProductService.Persistence.Extensions;
-using ProductService.WebApi.Endpoints;
-using ProductService.WebApi.Extensions;
-using ProductService.WebApi.Middlewares;
+using InventoryService.Persistence.Extensions;
+using InventoryService.Infrastructure.Extensions;
+using InventoryService.Application.Extensions;
+using InventoryService.WebApi.Extensions;
+using InventoryService.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigurePersistence(builder.Configuration);
 builder.Services.ConfigureApplication();
 builder.Services.ConfigureInfrastructure(builder.Configuration);
+builder.Services.ConfigurePersistence(builder.Configuration);
 
 builder.Services.ConfigureSwagger(builder.Configuration);
 builder.Services.ConfigureApiBehavior();
@@ -28,7 +27,6 @@ else if (app.Environment.IsProduction())
     app.SwaggerConfig(builder.Configuration, "SwaggerConfigProd");
 }
 
-app.ApplyMigration();
 app.UseHttpsRedirection();
 app.UseCors();
 app.UseErrorHandler();
@@ -36,6 +34,5 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapProductEndpoints();
 app.MapControllers();
 app.Run();

@@ -19,6 +19,19 @@ services:
     networks:
       - microservices-network
 
+  inventory-service:
+    build:
+      context: .
+      dockerfile: InventoryService/InventoryService.WebApi/Dockerfile
+    container_name: inventory-service
+    ports:
+      - "5100:5100"
+      - "5101:5101"
+    depends_on:
+      - rabbitmq
+    networks:
+      - microservices-network
+
   postgres:
     image: postgres:16
     container_name: postgres

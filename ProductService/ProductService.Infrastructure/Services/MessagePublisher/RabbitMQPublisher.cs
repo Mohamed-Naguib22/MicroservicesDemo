@@ -1,4 +1,6 @@
-﻿using ProductService.Application.Contract.IInfrastructure.IMessagePublisher;
+﻿using Microsoft.Extensions.Options;
+using ProductService.Application.Contract.IInfrastructure.IMessagePublisher;
+using ProductService.Infrastructure.Settings;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,20 @@ namespace ProductService.Infrastructure.Services.MessagePublisher
     public class RabbitMQPublisher : IMessagePublisher, IAsyncDisposable
     {
         private readonly ConnectionFactory _factory;
+        private readonly RabbitMQSettings _rabbitMQSettings;
         private IConnection _connection;
         private IChannel _channel;
         
-        public RabbitMQPublisher()
+        public RabbitMQPublisher(IOptions<RabbitMQSettings> rabbitMQSettings)
         {
-            _factory = new ConnectionFactory 
+            _rabbitMQSettings = rabbitMQSettings.Value;
+
+            _factory = new ConnectionFactory
             {
                 HostName = "rabbitmq",
                 UserName = "guest",
                 Password = "guest",
-                VirtualHost = "/"
+                VirtualHost = "/",
             };
         }
 
