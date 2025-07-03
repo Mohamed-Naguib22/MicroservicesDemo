@@ -1,6 +1,6 @@
 # 🧩 MicroservicesDemo
 
-A complete microservices-based system built using **.NET**, **RabbitMQ**, **Redis**, **Docker**, and **MongoDB**, **PostgreSQL**, demonstrating Clean Architecture, CQRS, MediatR, and Event-Driven communication. This project is ideal for learning microservices architecture in a practical and scalable manner.
+A complete microservices-based system built using **.NET**, **RabbitMQ**, **Redis**, **Docker**, **MongoDB**, and **PostgreSQL**, demonstrating Clean Architecture, CQRS, MediatR, and Event-Driven communication. This project is ideal for learning microservices architecture in a practical and scalable manner.
 
 ---
 
