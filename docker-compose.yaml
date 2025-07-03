@@ -4,7 +4,7 @@ services:
   product-service:
     build:
       context: .
-      dockerfile: ProductService.WebApi/ProductService.WebApi/Dockerfile
+      dockerfile: ProductService/ProductService.WebApi/Dockerfile
     container_name: product-service
     ports:
       - "8080:8080"
