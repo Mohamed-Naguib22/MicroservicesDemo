@@ -1,4 +1,7 @@
-﻿using InventoryService.Application.Contract.IRepositories.ICommon;
+﻿using InventoryService.Application.Contract.IInfrastructure.ICaching;
+using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
+using InventoryService.Domain.Constants;
+using InventoryService.Persistence.Caching;
 using InventoryService.Persistence.Repositories;
 using InventoryService.Persistence.Settings;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +29,14 @@ namespace InventoryService.Persistence.Extensions
             var mongoDatabase = mongoClient.GetDatabase(mongoConfig.DatabaseName);
 
             services.AddSingleton(mongoDatabase);
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration.GetConnectionString("Redis");
+                options.InstanceName = RedisKeys.PRODUCTS_KEY;
+            });
+
+            services.AddScoped<ICachingService, RedisCacheService>();
         }
     }
 }

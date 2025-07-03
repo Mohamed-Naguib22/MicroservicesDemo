@@ -29,6 +29,7 @@ services:
     depends_on:
       - rabbitmq
       - mongo
+      - redis
     networks:
       - microservices-network
 
@@ -54,6 +55,13 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - microservices-network
+
+  redis:
+    image: redis
+    ports:
+        - "6379:6379"
     networks:
       - microservices-network
 

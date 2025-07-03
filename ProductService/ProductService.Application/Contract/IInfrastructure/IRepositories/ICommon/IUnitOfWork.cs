@@ -1,11 +1,11 @@
-﻿using ProductService.Application.Contract.IRepositories.IEventStoreRepositories;
+﻿using ProductService.Application.Contract.IInfrastructure.IRepositories.IEventStoreRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Application.Contract.IRepositories.ICommon
+namespace ProductService.Application.Contract.IInfrastructure.IRepositories.ICommon
 {
     public interface IUnitOfWork : IDisposable
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using InventoryService.Application.Contract.IRepositories.ICommon;
+using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
 using InventoryService.Application.Mediator.Common;
 using InventoryService.Domain.Entities.ProductEntities;
 using MediatR;

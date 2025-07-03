@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Application.Contract.IRepositories.IEventStoreRepositories
+namespace ProductService.Application.Contract.IInfrastructure.IRepositories.IEventStoreRepositories
 {
     public interface IEventStoreRepository
     {

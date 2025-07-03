@@ -1,4 +1,4 @@
-﻿using InventoryService.Application.Contract.IRepositories.ICommon;
+﻿using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
 using InventoryService.Domain.Entities.Common;
 using MongoDB.Driver;
 using System;

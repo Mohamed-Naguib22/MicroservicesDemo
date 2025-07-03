@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductService.Application.Contract.IRepositories.ICommon;
+using ProductService.Application.Contract.IInfrastructure.IRepositories.ICommon;
 using ProductService.Persistence.Context;
 using System;
 using System.Collections.Generic;

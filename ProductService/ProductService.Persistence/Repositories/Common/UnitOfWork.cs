@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductService.Application.Contract.IRepositories.ICommon;
-using ProductService.Application.Contract.IRepositories.IEventStoreRepositories;
+using ProductService.Application.Contract.IInfrastructure.IRepositories.ICommon;
+using ProductService.Application.Contract.IInfrastructure.IRepositories.IEventStoreRepositories;
 using ProductService.Persistence.Context;
 using ProductService.Persistence.Repositories.EventStoreRepositories;
 using System;

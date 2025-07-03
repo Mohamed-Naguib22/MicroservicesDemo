@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryService.Application.Contract.IRepositories.ICommon
+namespace InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProductService.Application.Contract.IRepositories.ICommon;
+using ProductService.Application.Contract.IInfrastructure.IRepositories.ICommon;
 using ProductService.Persistence.Context;
 using ProductService.Persistence.Repositories.Common;
 using System;

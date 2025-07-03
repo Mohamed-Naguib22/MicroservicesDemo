@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Application.Contract.IRepositories.ICommon
+namespace ProductService.Application.Contract.IInfrastructure.IRepositories.ICommon
 {
     public interface IBaseRepository<T> where T : class
     {

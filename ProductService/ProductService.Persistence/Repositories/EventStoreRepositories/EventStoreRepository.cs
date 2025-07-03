@@ -1,4 +1,4 @@
-﻿using ProductService.Application.Contract.IRepositories.IEventStoreRepositories;
+﻿using ProductService.Application.Contract.IInfrastructure.IRepositories.IEventStoreRepositories;
 using ProductService.Domain.Events.Common;
 using ProductService.Persistence.Context;
 using ProductService.Persistence.Repositories.Common;

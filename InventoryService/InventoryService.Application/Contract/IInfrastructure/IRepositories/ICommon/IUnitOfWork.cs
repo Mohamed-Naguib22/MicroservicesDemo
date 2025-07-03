@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryService.Application.Contract.IRepositories.ICommon
+namespace InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon
 {
     public interface IUnitOfWork : IDisposable
     {
