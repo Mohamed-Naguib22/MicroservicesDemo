@@ -21,7 +21,7 @@ namespace InventoryService.Application.Features.ProductFeatures.Queries.GetAllPr
         {
             IEnumerable<Product> products;
 
-            var cahcedProducts = await _cachingService.GetDataAsync<IEnumerable<Product>>(RedisKeys.PRODUCTS_KEY);
+            var cahcedProducts = await _cachingService.GetAsync<IEnumerable<Product>>(RedisKeys.PRODUCTS_KEY);
 
             if (cahcedProducts is not null)
             {
@@ -31,7 +31,7 @@ namespace InventoryService.Application.Features.ProductFeatures.Queries.GetAllPr
             {
                 products = await _unitOfWork.GetRepository<Product>().GetAllAsync();
 
-                await _cachingService.SetDataAsync(RedisKeys.PRODUCTS_KEY, products);
+                await _cachingService.SetAsync(RedisKeys.PRODUCTS_KEY, products);
             }
 
             return _mapper.Map<IEnumerable<GetAllProductsResponse>>(products);

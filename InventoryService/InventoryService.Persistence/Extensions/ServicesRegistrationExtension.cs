@@ -7,6 +7,7 @@ using InventoryService.Persistence.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +22,20 @@ namespace InventoryService.Persistence.Extensions
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            var section = configuration.GetSection("MongoSettings");
+            var mongoConnectionString = configuration.GetSection("MongoSettings:ConnectionString").Value;
+            var mongoDatabaseName = configuration.GetSection("MongoSettings:DatabaseName").Value;
 
-            var mongoConfig = section.Get<MongoSettings>();
-            var mongoClient = new MongoClient(mongoConfig.ConnectionString);
-
-            var mongoDatabase = mongoClient.GetDatabase(mongoConfig.DatabaseName);
+            var mongoClient = new MongoClient(mongoConnectionString);
+            var mongoDatabase = mongoClient.GetDatabase(mongoDatabaseName);
 
             services.AddSingleton(mongoDatabase);
 
-            services.AddStackExchangeRedisCache(options =>
+            var redisConnectionString = configuration.GetSection("ConnectionStrings:Redis").Value;
+
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                options.Configuration = configuration.GetConnectionString("Redis");
-                options.InstanceName = RedisKeys.PRODUCTS_KEY;
+                var connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
+                return connectionMultiplexer;
             });
 
             services.AddScoped<ICachingService, RedisCacheService>();

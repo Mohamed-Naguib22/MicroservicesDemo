@@ -25,7 +25,7 @@ namespace InventoryService.Application.Features.ProductFeatures.Commands.CreateP
 
             await _unitOfWork.SaveChangesAsync();
 
-            await _cachingService.RemoveDataAsync(RedisKeys.PRODUCTS_KEY);
+            await _cachingService.DeleteAsync(RedisKeys.PRODUCTS_KEY);
 
             return Unit.Value;
         }
