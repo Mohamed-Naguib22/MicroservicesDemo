@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using InventoryService.Application.Abstractions.Mediator.Common;
 using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
 using InventoryService.Application.Exceptions;
-using InventoryService.Application.Mediator.Common;
 using InventoryService.Domain.Constants;
 using InventoryService.Domain.Entities.ProductEntities;
 using System;

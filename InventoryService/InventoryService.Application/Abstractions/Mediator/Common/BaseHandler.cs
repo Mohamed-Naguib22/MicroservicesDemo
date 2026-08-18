@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryService.Application.Mediator.Common
+namespace InventoryService.Application.Abstractions.Mediator.Common
 {
     public abstract class BaseHandler<TEntity, TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TEntity : BaseEntity

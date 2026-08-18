@@ -1,4 +1,6 @@
-﻿using InventoryService.Domain.Events;
+﻿using InventoryService.Application.Contract.IInfrastructure.ICaching;
+using InventoryService.Domain.Constants;
+using InventoryService.Domain.Events;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +10,8 @@ using System.Threading.Tasks;
 
 namespace InventoryService.Application.Features.ProductFeatures.Commands.UpdateProduct
 {
-    public sealed record UpdateProductRequest(string ProductId, UpdatedProduct UpdatedProduct) : IRequest<Unit>;
+    public sealed record UpdateProductRequest(string ProductId, UpdatedProduct UpdatedProduct) : IRequest<Unit>, ICacheInvalidatingRequest
+    {
+        public string CacheKeyToInvalidate => RedisKeys.PRODUCTS_KEY;
+    }
 }

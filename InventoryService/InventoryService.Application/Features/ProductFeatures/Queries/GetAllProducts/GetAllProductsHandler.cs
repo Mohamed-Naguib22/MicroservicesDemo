@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using InventoryService.Application.Abstractions.Mediator.Common;
 using InventoryService.Application.Contract.IInfrastructure.ICaching;
 using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
-using InventoryService.Application.Mediator.Common;
 using InventoryService.Domain.Constants;
 using InventoryService.Domain.Entities.ProductEntities;
 using MediatR;
@@ -14,25 +14,12 @@ using System.Threading.Tasks;
 
 namespace InventoryService.Application.Features.ProductFeatures.Queries.GetAllProducts
 {
-    public sealed class GetAllProductsHandler(IUnitOfWork unitOfWork, IMapper mapper, ICachingService cachingService) : BaseHandler<Product, GetAllProductsRequest, IEnumerable<GetAllProductsResponse>>(unitOfWork, mapper)
+    public sealed class GetAllProductsHandler(IUnitOfWork unitOfWork, IMapper mapper) : BaseHandler<Product, GetAllProductsRequest, IEnumerable<GetAllProductsResponse>>(unitOfWork, mapper)
     {
-        private readonly ICachingService _cachingService = cachingService;
         public override async Task<IEnumerable<GetAllProductsResponse>> Handle(GetAllProductsRequest request, CancellationToken cancellationToken)
         {
-            IEnumerable<Product> products;
+            var products = await _unitOfWork.GetRepository<Product>().GetAllAsync();
 
-            var cahcedProducts = await _cachingService.GetAsync<IEnumerable<Product>>(RedisKeys.PRODUCTS_KEY);
-
-            if (cahcedProducts is not null)
-            {
-                products = cahcedProducts;
-            }
-            else
-            {
-                products = await _unitOfWork.GetRepository<Product>().GetAllAsync();
-
-                await _cachingService.SetAsync(RedisKeys.PRODUCTS_KEY, products);
-            }
 
             return _mapper.Map<IEnumerable<GetAllProductsResponse>>(products);
         }

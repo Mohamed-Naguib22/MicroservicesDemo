@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductService.Application.Mediator.Common
+namespace ProductService.Application.Abstractions.Mediator.Common
 {
     public abstract class BaseEventHandler<TEvent, TRequest>(IEventDispatcher eventDispatcher, IMapper mapper) : IRequestHandler<TRequest, Unit> where TRequest : IRequest<Unit>
     {
