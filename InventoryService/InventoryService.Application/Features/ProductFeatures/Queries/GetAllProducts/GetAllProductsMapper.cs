@@ -1,18 +1,13 @@
-﻿using AutoMapper;
+﻿using Mapster;
 using InventoryService.Domain.Entities.ProductEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryService.Application.Features.ProductFeatures.Queries.GetAllProducts
 {
-    public sealed class GetAllProductsMapper : Profile
+    public sealed class GetAllProductsMapper : IRegister
     {
-        public GetAllProductsMapper()
+        public void Register(TypeAdapterConfig config)
         {
-            CreateMap<Product, GetAllProductsResponse>();
+            config.NewConfig<Product, GetAllProductsResponse>();
         }
     }
 }

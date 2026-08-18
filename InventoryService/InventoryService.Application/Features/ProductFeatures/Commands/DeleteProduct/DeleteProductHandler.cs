@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using InventoryService.Application.Abstractions.Mediator.Common;
+﻿using InventoryService.Application.Abstractions.Mediator.Common;
 using InventoryService.Application.Contract.IInfrastructure.IRepositories.ICommon;
 using InventoryService.Application.Exceptions;
 using InventoryService.Domain.Entities.ProductEntities;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InventoryService.Application.Features.ProductFeatures.Commands.DeleteProduct
 {
-    public sealed class DeleteProductHandler(IUnitOfWork unitOfWork, IMapper mapper) : BaseHandler<Product, DeleteProductRequest, Unit>(unitOfWork, mapper)
+    public sealed class DeleteProductHandler(IUnitOfWork unitOfWork) : BaseRepositoryHandler<Product, DeleteProductRequest, Unit>(unitOfWork)
     {
         public override async Task<Unit> Handle(DeleteProductRequest request, CancellationToken cancellationToken)
         {

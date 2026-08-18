@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using InventoryService.Application.Behaviors;
 using InventoryService.Application.Behaviors.Caching;
+using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,9 +18,12 @@ namespace InventoryService.Application.Extensions
     {
         public static void ConfigureApplication(this IServiceCollection services)
         {
-            services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
+            var config = TypeAdapterConfig.GlobalSettings;
+            config.Scan(Assembly.GetExecutingAssembly());
+            services.AddSingleton(config);
+            
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
+            services.AddScoped<IMapper, ServiceMapper>();
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
