@@ -38,11 +38,11 @@ Redis is used for **caching** and enhancing performance. The architecture follow
 
 ## 🧩 Microservices
 
-| Service              | Tech Stack               | Database     | Description                                  |
-|----------------------|--------------------------|--------------|----------------------------------------------|
-| **ApiGateway**       | ASP.NET Core + YARP      | -            | Single public entry point, reverse-proxies requests to the backend services |
-| **ProductService**   | ASP.NET Core Minimal API | PostgreSQL   | Handles product catalog and operations       |
-| **InventoryService** | ASP.NET Core Minimal API | MongoDB      | Manages stock levels and inventory tracking  |
+| Service              | Tech Stack               | Database     | Mapper     | Description                                  |
+|----------------------|--------------------------|--------------|------------|---------------------------------|
+| **ApiGateway**       | ASP.NET Core + YARP      | -            | -          | Single public entry point, reverse-proxies requests to the backend services |
+| **ProductService**   | ASP.NET Core Minimal API | PostgreSQL   | AutoMapper | Handles product catalog and operations       |
+| **InventoryService** | ASP.NET Core Minimal API | MongoDB      | Mapster    | Manages stock levels and inventory tracking  |
 
 Each service follows the **Single Responsibility Principle**, and business logic is encapsulated in the **Application Layer** using **Vertical Slice Architecture** and **Clean Architecture** principles.
 
