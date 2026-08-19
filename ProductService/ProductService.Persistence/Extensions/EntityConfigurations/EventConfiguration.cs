@@ -26,6 +26,22 @@ namespace ProductService.Persistence.Extensions.EntityConfigurations
             builder.Property(e => e.Data)
                 .IsRequired()
                 .HasColumnType("varchar(max)");
+
+            builder.Property(e => e.IsPublished)
+                .IsRequired()
+                .HasDefaultValue(false);
+
+            builder.Property(e => e.PublishedOn);
+
+            builder.Property(e => e.RetryCount)
+                .IsRequired()
+                .HasDefaultValue(0);
+
+            builder.Property(e => e.LastError)
+                .HasColumnType("text");
+
+            builder.HasIndex(e => new { e.IsPublished, e.OccurredOn })
+                .HasDatabaseName("IX_Events_IsPublished_OccurredOn");
         }
     }
 }

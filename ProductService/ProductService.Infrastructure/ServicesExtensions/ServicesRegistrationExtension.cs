@@ -5,6 +5,7 @@ using ProductService.Application.Contract.IInfrastructure.IEventDispatcher;
 using ProductService.Application.Contract.IInfrastructure.IMessagePublisher;
 using ProductService.Infrastructure.Services.EventDispatcher;
 using ProductService.Infrastructure.Services.MessagePublisher;
+using ProductService.Infrastructure.Services.Outbox;
 using ProductService.Infrastructure.Settings;
 using Serilog;
 using System;
@@ -19,13 +20,8 @@ namespace ProductService.Infrastructure.ServicesExtensions
     {
         public static void ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostBuilder host)
         {
-            services.Configure<RabbitMQSettings>(options =>
-            {
-                options.UserName = configuration["RabbitMQSettings:UserName"];
-                options.Password = configuration["RabbitMQSettings:Password"];
-                options.HostName = configuration["RabbitMQSettings:HostName"];
-                options.VirtualHost = configuration["RabbitMQSettings:VirtualHost"];
-            });
+            services.Configure<RabbitMQSettings>(configuration.GetSection("RabbitMQSettings"));
+            services.Configure<OutboxSettings>(configuration.GetSection("OutboxSettings"));
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
@@ -35,8 +31,8 @@ namespace ProductService.Infrastructure.ServicesExtensions
             host.UseSerilog();
 
             services.AddScoped<IEventDispatcher, EventDispatcher>();
-
             services.AddTransient<IMessagePublisher, RabbitMQPublisher>();
+            services.AddHostedService<OutboxPublisherService>();
         }
     }
 }

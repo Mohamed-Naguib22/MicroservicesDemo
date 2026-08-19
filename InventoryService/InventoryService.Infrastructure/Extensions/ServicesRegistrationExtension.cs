@@ -28,13 +28,7 @@ namespace InventoryService.Infrastructure.Extensions
 
             host.UseSerilog();
 
-            services.Configure<RabbitMQSettings>(options =>
-            {
-                options.UserName = configuration["RabbitMQSettings:UserName"];
-                options.Password = configuration["RabbitMQSettings:Password"];
-                options.HostName = configuration["RabbitMQSettings:HostName"];
-                options.VirtualHost = configuration["RabbitMQSettings:VirtualHost"];
-            });
+            services.Configure<RabbitMQSettings>(configuration.GetSection("RabbitMQSettings"));
         }
     }
 }

@@ -16,9 +16,9 @@ namespace ProductService.Application.Abstractions.Mediator.Common
 
         public async virtual Task<Unit> Handle(TRequest request, CancellationToken cancellationToken)
         {
-            var @event =_mapper.Map<TEvent>(request);
+            var @event = _mapper.Map<TEvent>(request);
 
-            await _eventDispatcher.AppendAndPublishEventAsync(@event);
+            await _eventDispatcher.AppendEventAsync(@event);
 
             return Unit.Value;
         }

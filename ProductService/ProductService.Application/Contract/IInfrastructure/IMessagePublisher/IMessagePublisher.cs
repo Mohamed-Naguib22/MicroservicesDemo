@@ -9,5 +9,6 @@ namespace ProductService.Application.Contract.IInfrastructure.IMessagePublisher
     public interface IMessagePublisher
     {
         Task PublishAsync<T>(T message);
+        Task PublishAsync(object message, Type messageType);
     }
 }

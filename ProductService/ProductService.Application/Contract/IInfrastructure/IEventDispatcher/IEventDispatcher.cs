@@ -8,6 +8,6 @@ namespace ProductService.Application.Contract.IInfrastructure.IEventDispatcher
 {
     public interface IEventDispatcher
     {
-        Task AppendAndPublishEventAsync<T>(T @event);
+        Task AppendEventAsync<T>(T @event);
     }
 }
