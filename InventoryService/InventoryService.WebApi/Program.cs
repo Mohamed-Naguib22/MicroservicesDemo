@@ -7,8 +7,6 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://*:5100");
-
 builder.Services.ConfigureApplication();
 builder.Services.ConfigureInfrastructure(builder.Configuration, builder.Host);
 builder.Services.ConfigurePersistence(builder.Configuration);

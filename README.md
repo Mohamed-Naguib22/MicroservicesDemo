@@ -40,6 +40,7 @@ Redis is used for **caching** and enhancing performance. The architecture follow
 
 | Service              | Tech Stack               | Database     | Description                                  |
 |----------------------|--------------------------|--------------|----------------------------------------------|
+| **ApiGateway**       | ASP.NET Core + YARP      | -            | Single public entry point, reverse-proxies requests to the backend services |
 | **ProductService**   | ASP.NET Core Minimal API | PostgreSQL   | Handles product catalog and operations       |
 | **InventoryService** | ASP.NET Core Minimal API | MongoDB      | Manages stock levels and inventory tracking  |
 
@@ -58,3 +59,13 @@ Each service follows the **Single Responsibility Principle**, and business logic
 
 ```bash
 docker-compose up --build
+```
+
+Once running, every request goes through the gateway on **http://localhost:8085**. `ProductService` and `InventoryService` are no longer published to the host directly — they're only reachable from other containers on `microservices-network`.
+
+---
+
+## 🚪 API Gateway (YARP)
+
+`ApiGateway` is a small ASP.NET Core project that uses [YARP (Yet Another Reverse Proxy)](https://microsoft.github.io/reverse-proxy/) to act as the single entry point for the whole system. It forwards incoming requests to the right backend service based on a path prefix and strips that prefix before forwarding.
+

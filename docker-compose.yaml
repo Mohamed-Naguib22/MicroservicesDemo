@@ -1,13 +1,28 @@
 version: '3.8'
 
 services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/ApiGateway.WebApi/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8085:8080"
+    depends_on:
+      - product-service
+      - inventory-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+    networks:
+      - microservices-network
+
   product-service:
     build:
       context: .
       dockerfile: ProductService/ProductService.WebApi/Dockerfile
     container_name: product-service
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     depends_on:
       - postgres
       - rabbitmq
@@ -23,8 +38,8 @@ services:
       context: .
       dockerfile: InventoryService/InventoryService.WebApi/Dockerfile
     container_name: inventory-service
-    ports:
-      - "5100:5100"
+    expose:
+      - "5100"
     depends_on:
       - rabbitmq
       - mongo
