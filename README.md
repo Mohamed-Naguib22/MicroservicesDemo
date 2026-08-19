@@ -20,7 +20,7 @@ Redis is used for **caching** and enhancing performance. The architecture follow
 
 ## ✅ Key Features
 
-- ✅ Built with **.NET 9** and **Clean Architecture**
+- ✅ Built with **.NET 10** and **Clean Architecture**
 - ✅ Implements **CQRS** with **MediatR**
 - ✅ Uses **Vertical Slice Architecture (VSA)** for modular design
 - ✅ Supports **Event Sourcing** for traceable and replayable state
